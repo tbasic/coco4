@@ -18,6 +18,7 @@ function clearVal() {
 </script>
 </head>
 <body>
+<!-- 의미없는 주석1 master-->
 <h3>notice.jsp</h3>
 <c:if test="${empty sessionScope.uid }">
 	<a href="../login/login.do">login</a>  | 
