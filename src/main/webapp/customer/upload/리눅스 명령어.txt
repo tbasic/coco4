@@ -1,0 +1,226 @@
+리눅스 명령어
+
+--------수요일---------------
+사용자 생성, 삭제, 그룹생성, 삭제
+  199  useradd blue1
+  200  passwd blue1
+  201  groupadd g1
+  202  tail -5 /etc/group
+  203  tail -5 /etc/passwd
+  204  tail -5 /etc/shadow
+  205  userdel -rf blue1
+  206  tail -5 /etc/shadow
+  207  groupdel g1
+  208  tail -5 /etc/group
+
+
+  217  chmod 644 Hello.java 
+
+mv 명령
+   56  ll ../
+   57  mkdir /home/centos/vitest2
+   58  ll
+   59  ll ../
+   60  ll
+   61  mv Hello.java ../vitest2/He.java
+   62  ll ../vitest2
+   63  ll
+   64  mv ../vitest2/He.java ./Hello.java
+
+cp명령
+  68  ll
+   69  cp Hello.java Hello2.java
+   70  ll
+   71  cp Hello.class Hello2.class
+   72  ll
+   73  mv Hello2.java Hello2.class ../vitest2
+   74  ll ../vitest2
+   75  ll
+   76  mv ../vitest2/Hello2.* ./
+
+rm명령
+   81  rm Hello2.java 
+   82  cat>Hello2.java
+   83  cat Hello2.java 
+   84  ll
+   85  rm Hello2.java 
+   86  ll
+   87  rm -rf Hello2.class 
+   88  ll
+
+less more 
+ 231  clear
+  232  more /etc/passwd
+  233  less /etc/passwd
+
+head
+[root@localhost vitest]# head /etc/passwd
+
+link 
+hardlink
+softlink
+  211  cat basefile.txt 
+  212  ll
+  213  ln basefile.txt hardlink
+  214  ll
+  215  cat hardlink 
+  216  ln -s basefile.txt softlink
+  217  ll
+  218  cat softlink 
+  219  mv basefile.txt ../
+  220  ll
+  221  cat hardlink 
+  222  cat softlink 
+  223  mv ../basefile.txt ./
+
+
+tar
+  262  mkdir tartest
+  263  cd tartest/
+  264  ll
+  265  clar
+  266  clear
+  267  ll
+  268  touch a1.txt a2.txt a3.txt
+  269  ll
+  270  tar cvf a123.tar a*
+  271  ll
+  272  rm -rf a*.txt
+  273  ll
+  274  tar xvf a123.tar 
+  275  ll
+  276  tar total.tar a*
+  277  tar total.tar a*.txt a123.tar
+  278  tar cvf total.tar a*
+  279  ll
+  280  rm -rf a*.txt
+  281  rm -rf a123.tar 
+  282  ll
+  283  tar xvf total.tar 
+
+ tar cvzf a123.tar.gz a?.txt
+  304  ll
+  305  rm -rf a?.txt
+  306  ll
+  307  tar -xvzf a123.tar.gz 
+  308  ll
+
+
+[root@localhost tartest]# tar xvzf a123.tar.gz -C ./dis/
+
+mariadb
+254  yum install mariadb-server.x86_64 -y
+  255  systemctl status mariadb.service 
+  256  systemctl start mariadb.service 
+  257  systemctl status mariadb.service 
+  258  mysql -u root -p
+  259  clear
+  260  mysql_secure_installation
+  261  clear
+  262  mysql -u root -p
+
+---------------------------------
+workbench설치및 실행
+[root@localhost ~]#yum install epel-release -y
+[root@localhost ~]#wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+[root@localhost ~]#yum install mysql-community-release-el7-5.noarch.rpm -y
+[root@localhost ~]#yum install mysql-workbench -y
+
+마지막으로 실행
+[root@localhost ~]#mysql-workbench
+
+마리아디비 접속 실행명령확인
+
+
+
+-----목요일--------
+그룹관리gui
+   22  system-config-users
+   23  yum -y install system-config-users
+   24  system-config-users
+
+rpm명령
+
+
+톰캣 다운 설치
+
+
+윈도우 외부에서 리눅스 웹서버에 접근 
+방화벽 허용
+   80  whoami
+   81  firewall-cmd --permanent --zone=public --add-port=8080/tcp
+   82  firewall-cmd --reload 
+
+방화벽 포토닫기
+firewall-cmd --permanent --zone=public --remove-port=[port number]/tcp
+[root@localhost]# firewall-cmd --reload 
+
+목록상세 출력
+[root@localhost ~]# firewall-cmd --list-all-zones #centos7에서 다른버전 다를 수도?
+특정존 보기
+[root@localhost ~]# firewall-cmd --list-all --zone public
+
+
+
+
+윈도 외부워크벤치에서 vm linux의 마리아 디비접속
+포트열기
+[root@localhost]# firewall-cmd --permanent --zone=public --add-port=3306/tcp
+[root@localhost]# firewall-cmd --reload 
+
+root접속허용
+MariaDB [mysql]> grant all privileges on *.* to 'root'@'%' identified by '111111';
+MariaDB [mysql]> flush privileges;
+MariaDB [mysql]> select host,user from user;
+
+---------------금요일------------------------
+
+스프링 mariadb사용
+윈도우 마리아디비 테이블만들기
+스프링 접속 프로젝트 만들기
+
+
+-----------telnet-------------
+
+telnet셋팅
+ 3  rpm -qa | grep telnet
+    4  yum -y install telnet-server
+    5  systemctl restart telnet.socket
+    6  systemctl status telnet.socket
+   10  yum -y install telnet
+   11  telnet 127.0.0.1
+   12  firewall-config
+   13  systemctl enable telnet.socket
+   14  ifconfig
+
+port 허용
+[root@localhost]# firewall-cmd --permanent --zone=public --add-port=23/tcp
+[root@localhost]# firewall-cmd --reload 
+or
+[root@localhost ~]# firewall-config 
+
+
+--------------------외부피시접속되도록 host컴 셋팅----------------------
+# FTP (both active and passive FTP is always enabled)
+#      ftp localhost 8887
+#8887 = 192.168.27.128:21
+
+#telnet
+2000 = 192.168.48.137:23 <- 아이피는 vmware의 ifconfig의 ip
+
+-------
+다른pc에서 접속할때
+>telnet 접속할pc윈아이피 2000
+
+==============================
+--------월요일리눅스---------
+백도어실습
+먼저 telnet 점검
+
+[root@localhost tmp]# find /tmp -user root -perm -4000 -print
+
+
+
+
+
+
