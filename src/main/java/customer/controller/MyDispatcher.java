@@ -52,9 +52,10 @@ public class MyDispatcher extends HttpServlet{
 			}
 			
 			
-//			else if(com.equals("/login/login.do")) {
-//				controller=new LoginController();
-//			}else if(com.equals("/login/loginProc.do")) {
+			else if(com.equals("/login/login.do")) {
+				controller=new LoginController();
+			}
+//			else if(com.equals("/login/loginProc.do")) {
 //				controller=new LoginProcController();
 //			}else if(com.equals("/login/logoutProc.do")) {
 //				controller=new LogoutProcController();
